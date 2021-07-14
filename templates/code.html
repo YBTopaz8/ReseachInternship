@@ -1,0 +1,8 @@
+<h1> Entrez votre code d'invitation</h1>
+<form method= "POST" action="{% url 'code_valid' %}"> <!--sends it to code val view and you, to home.html-->
+
+{{inv.invCode}}
+
+
+<button type="submit" class="btn btn-primary">Valider</button>
+</form>
