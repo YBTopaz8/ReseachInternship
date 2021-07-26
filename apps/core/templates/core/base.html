@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %} Project</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+</head>
+<body>
+    <div id="navbar-app">
+    <nav class="navbar{% if request.user.is_authenticated %} is-dark {% else %} is-light{% endif %}">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item"><strong>Yvan Brunel's Project</strong></a>
+
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-end">
+            {% if not request.user.is_authenticated %}
+                <!--<a href="{% url 'plans' %}" class="navbar-item">Plans</a>>-->
+            {% endif %}
+                <div class="navbar-item">
+                    <div class="buttons">
+                    {% if request.user.is_authenticated %}
+                        
+                        <a href="{% url 'myaccount' %}" class="button is-success">Welcome {% firstof request.user.get_full_name request.user.username%} {% if active_team.title %}({{active_team.title}}){% endif %}</a>
+                    {% else %}
+                       <!-- <a href="{% url 'signup' %}" class="button is-success"> <strong>Sign Up</strong></a>
+                        <a href="{% url 'login' %}" class="button">Log In</a>-->
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--Env NavBar-->
+
+<!--Main-->
+<section class="section">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification is-info"> {{ message }} </div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}
+
+    {% endblock %}
+
+</section>
+<!--End Main-->
+
+<!--Footer-->
+<footer class="footer">
+    <div class="column is-multiline">
+            <div class="column is-4">
+                <h2 class="subtitle">Internship Project</h2>
+            </div>
+
+            <div class="column is-offset-6 is-2">
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+                    <li><a href="{% url 'terms' %}">Terms of Service</a></li>
+                </ul>
+            </div>  
+            <div class="column is-12 has-text-centered">
+                <p>Copyright (c) 2021</p>
+            </div>
+    </div>
+</footer>
+<!--End Footer-->
+
+<!--Scripts-->
+
+        <script src="https://unpkg.com/vue@next"></script>
+ {% block scripts %}
+        {% endblock %}
+
+</body>
+</html>

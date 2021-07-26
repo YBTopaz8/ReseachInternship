@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Home |
+
+{% endblock title %}
+
+{% block content %}
+<section class="hero is-medium is-light is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title"> Welcome to Internship Project</h1>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            <div class="columns is-align-items mt-6">
+                <div class="column is-4 image">
+                    <img src="{% static 'images/unsplash2.jpg' %}">
+                </div>
+                
+                <div class="column is-8 text">
+                    <h2 class="subtitle">Simple Internship Project</h2>
+
+                    <p>Working on it. But So Far So Good Working on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So Good </p> 
+                </div>
+            </div>
+
+<!--End 1-->
+              <div class="columns is-align-items mt-6">
+                  <div class="column is-8 text">
+                    <h2 class="subtitle">Simple Internship Project</h2>
+
+                    <p>Working on it. But So Far So Good Working on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So Good 2</p> 
+                  </div>
+                  <div class="column is-4 image">
+                    <img src="{% static 'images/unsplash1.jpg' %}">
+                   </div>
+                
+                
+            </div>
+
+<!--End 2-->
+              <div class="columns is-align-items mt-6">
+                <div class="column is-4 image">
+                    <img src="{% static 'images/unsplash1.jpg' %}">
+                </div>
+                
+                <div class="column is-8 text">
+                    <h2 class="subtitle">Simple Internship Project</h2>
+
+                    <p>Working on it. But So Far So Good Working on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So GoodWorking on it. But So Far So Good  3</p> 
+                </div>
+            </div>
+<!--End 3-->
+        </div>
+    </div>
+        <div class="columns is-align-items-center mt-6">
+            <div class="column is-4 is-offset-4 has-text-centered">
+                <h2 class="subtitle">Let's Get Started</h2>
+
+                <a href="{% url 'signup' %}" class="button is-success is-large">Get a free account </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

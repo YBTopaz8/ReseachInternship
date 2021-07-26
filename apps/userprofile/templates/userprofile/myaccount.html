@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Account | {% endblock %}
+
+{% block content %}
+
+    <nav class="breadcrumb" arial-label="breadcrumbs">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li class="is-active"><a href="{% url 'myaccount' %}" aria-current="page">My account</a></li>
+        </ul>
+    </nav>
+
+<div class="columns">
+    <div class="column is-6">
+        <div class="media mb-4">
+            <div class="media-left">
+                <figure class="image is-64x64" >
+                    <img src="{{user.userprofile.get_avatar}}">
+                </figure>
+
+            </div>
+
+          <div class="media-content">
+                    <p class="title is-3">{% firstof user.get_full_name user.username %}</p>
+                    <p class="subtitle is-6">{{ user.email }}</p>
+                </div>
+        </div>
+          <a href="{% url 'edit_profile' %}" class="button is-info">Edit Profile</a>
+    <a href="{% url 'logout' %}" class="button is-danger">Log Out</a>
+    </div>
+</div>
+
+
+    {% if invitations %}
+    <div class="notification is-info">
+        <h2 class="subtitle">You have pending invitations</h2>
+
+        {% for invitation in invitations %}
+            <a href="{% url 'accept_invitation' %}">{{ invitation.team.title }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="columns">
+        <div class="column is-12">
+         
+            <a href="{% url 'team:add' %}" class="button is-success">Add team</a>
+        </div>
+    </div>
+ <div class="columns">
+        {% if active_team %}
+            <div class="column is-4">
+                <div class="notification has-background-success-light">
+                    <h3 class="is-size-5">{{ active_team.title }}{% if active_team.created_by == request.user %}(Owner){% else %}(Member){% endif %}</h3>
+                
+                    <h3 class="is-size-6">SHOW PLAN HERE</h3>
+
+                    <hr>
+
+                    <a href="{% url 'team:team' active_team.id %}" class="button is-success">Details</a>
+
+                    {% if active_team.created_by == request.user %}
+                        <a href="#" class="button is-info">Invite users</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% for team in teams %}
+            <div class="column is-4">
+                <div class="notification">
+                    <h3 class="is-size-5">{{ team.title }}{% if team.created_by == request.user %}(Owner){% else %}(Member){% endif %}</h3>
+                
+                    <h3 class="is-size-6">SHOW PLAN HERE</h3>
+
+                    <hr>
+
+                    <a href="{% url 'team:team' team.id %}" class="button is-success">Details</a>
+                    <a href="{% url 'team:activate_team' team.id %}" class="button is-info">Activate</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+ 
+{% endblock %}
