@@ -1,6 +1,7 @@
 # ReseachInternship (ENGLISH AND FRENCH NOTES)
 
 FRENCH:
+
 Repo du projet de stage
 Site web dans lequel les utilisateurs peuvent se connecter UNIQUEMENT avec un code d'invitation.
 L'administrateur peut envoyer un mail aux utilisateurs, le mail contiendra le code d'invitation.
@@ -49,6 +50,7 @@ b.	EDITER LA CONFIGURATION SMTP dans invitations/settings.py avec ce qui vous co
 
 Plus de mises à jour à venir ! 
 
+===================================================================================================================
 ENGLISH:
 Internship Project Repo
 Website in which Users Can login ONLY with an invitation code.
