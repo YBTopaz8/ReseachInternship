@@ -35,8 +35,8 @@ LOGIN_REDIRECT_URL = 'myaccount'
 LOGOUT_REDIRECT_URL = 'frontpage'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '8brunel@gmail.com'
-EMAIL_HOST_PASSWORD = 'Yvanbrunel8'
+EMAIL_HOST_USER = 'VOTRE_GMAIL'
+EMAIL_HOST_PASSWORD = 'VOTRE_MOT_DE_PASSE'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_EMAIL_FROM = 'Internship <noreply@YvanBrunel.proj>'
