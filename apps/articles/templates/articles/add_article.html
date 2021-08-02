@@ -1,0 +1,120 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %} Add Article | {% endblock title %}
+
+{% block content %}
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="{% url 'myaccount' %}">My account</a></li>
+        <li class="is-active"><a href="{% url 'add_article' %}" aria-current="page">Add an Article</a></li>
+    </ul>
+</nav>
+
+<h1 class="title">Add a new Article</h1>
+
+
+
+<div class="columns"> 
+    <div class="column is-4">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                Article Code (Non Modifiable)
+                <input class="label" name="art_code" value="A{{code}}" readonly></input>
+            </div>
+
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input type="text" class="input" name="art_title" placeholder="Enter Article Title">
+                </div>
+            </div>
+            
+            <div class="field">
+                <label class="label"> Category</label>
+                <div class="control">
+                    <!--<input type="text" class="select" name="category" placeholder="Enter Article Title">-->
+                   <div class="select">
+                        <select name="art_category">
+                            {% for items in cat %}
+                              <option>{{items.name}}</option>
+                            {% endfor %}
+                        </select>
+                   
+            </div>
+            <div class="field">
+                <label class="label"> Article Details</label>
+                <div class="control">
+                    <!--<input type="text" class="select" name="category" placeholder="Enter Article Title">-->
+                   
+                        <textarea name="art_description" class="textarea"></textarea>
+            </div>
+
+            <div class="field">
+                <label class="label">Publisher (Non Modifiable)</label>
+                <div class="control">
+                     <input type="text" readonly class="input" value="{{request.user.username}}" name="art_publisher" >
+                </div>
+            </div>
+
+            <div class="field">
+               
+            </div>
+            
+
+            <div class="field">
+                <label class="label">Article Volume</label>
+                <div class="control">
+                    <input type="number" class="input" name="art_volume" placeholder="1" >
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Published Date</label>
+                <div class="control">
+                    <input type="date" class="input" name="art_date" >
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Article Cover</label>
+                <figure class="image is-64x64">
+                    <img src="{% static "images/article_205px.png" %}">
+                </figure>
+                <div class="control mt-2">
+                    <input type="file" name="art_cover" id="id_avatar" class="input">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Article Document</label>
+                <div class="control mt-2">
+                    <input type="file" name="art_document" id="id_avatar" class="input">
+                </div>
+            </div>
+
+           
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-link is-rounded">Add Article</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    ::placeholder {
+  color: white;
+  font-weight: bold;
+  opacity: 1; /* Firefox */
+}
+
+</style>
+{% endblock content %}

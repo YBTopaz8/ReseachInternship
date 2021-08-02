@@ -8,6 +8,62 @@ L'administrateur peut envoyer un mail aux utilisateurs, le mail contiendra le co
 lorsque l'utilisateur se connecte, le système doit être capable de reconnaître le code
 un code ne peut être utilisé qu'UNE SEULE FOIS.
 
+================================================================================
+- Mise à jour 02/8/2021 (Fonctionnalités utilisateur implémentées)
+================================================================================
+
+Après la mise à jour précédente, je me suis concentré un peu plus sur l'apprentissage des modèles/fichiers statiques et des URLs. Je n'ai pas encore saisi tout le concept, mais j'ai acquis suffisamment de connaissances pour être capable d'implémenter une forme basique d'expérience utilisateur. Comme expliqué ci-dessous.
+Le Changelog complet est affiché ci-dessous ; 
+(aussi)Les NOTES D'INSTALLATION SONT PLUS LOIN AU-DESSOUS, donc assurez-vous de les suivre fidèlement afin d'être prêt à utiliser le système ;
+Ajouté :
+- Application "Articles" : qui est l'application qui gère tout ce qui concerne les articles (ajout/modification/suppression).
+- Les utilisateurs peuvent ajouter un article après s'être connectés
+- Ils peuvent également modifier et supprimer l'article facilement
+- Un aperçu rapide des articles en page d'accueil, qui peuvent être triés par leur catégorie (ils sont seulement visibles pour le moment. En cliquant dessus, aucun effet ne sera obtenu pour le moment. Je vais travailler dessus très bientôt)
+- Ajout de la barre de connexion même pour les utilisateurs non connectés, afin qu'ils puissent facilement cliquer pour se connecter, plutôt que de taper des urls. Si vous n'avez pas de compte et que vous cliquez sur "Signup", vous serez invité à écrire votre code d'invitation avant de continuer.
+Supprimé :
+- La possibilité pour TOUT utilisateur de créer une équipe a été supprimée. (ceci parce que le droit de créer une équipe devrait être réservé aux chefs d'équipe nommables).
+- La possibilité pour TOUT utilisateur d'inviter des personnes à une équipe a également été supprimée, avec le même raisonnement que le précédent.
+- La possibilité pour un utilisateur d'appartenir à différentes équipes a été supprimée pour le moment. Principalement pour des raisons de simplicité. Elle peut être réintroduite si nécessaire.
+- Autres minorités
+Autres mentions :
+- La page d'accueil s'appelle "frontpage1.html" elle est actuellement utilisée à des fins de développement et de tests. Quand tout sera clair, tout sera déplacé vers "frontpage.html". 
+- L'option "inviter un utilisateur" dans la page "myaccount" fonctionne maintenant comme prévu.
+Autres choses que j'ai pu oublier 😅
+
+
+Plus de mises à jour à venir ! 
+
+===================================================================================================================
+
+ENGLISH:
+
+================================================================================
+Update 02/8/2021 (User Functionalities implemented)
+================================================================================
+
+After the previous, I focused a bit more on learning about models/static files and URLs. I haven’t grasped the whole concept, but I have acquired enough knowledge to be able to implement a BASIC form of user experience. As explained below.
+Full Changelog, INSTALLATION NOTES EVEN FURTHER BELOW, so endeavor to follow them keenly in order to be able to be good to go;
+Added:
+-	“Articles” application: which is the app that manages whatever concerns Articles (addition/edit/deletion).
+-	Users can successfully add an article after login
+-	They can also edit and delete the article easily
+-	A quick overview of the articles in frontpage, that can be sorted by their category (they are only viewable for now. Clicking on them won’t do anything just yet. I’ll be working on them soon enough)
+-	Added the login bar even for non-logged user, so they can easily click to login, rather than typing urls. If you don’t have an account and click on signup, you will be prompted to write your invitation code first before continuining
+Removed:
+-	The ability for ANY user to create a team was removed. (this is so because the right to create a team should be reserved to appointable team leaders)
+-	The ability for ANY user to invite people to a team has also been removed, with the same reasoning as the previous in mind.
+-	The ability for one user to belong to different teams has been removed for now. Mostly for the sake of simplicity. It can be brought back if need be.
+-	Other minorities
+Other Mentions:
+-	The frontpage is called “frontpage1.html” it is currently being used for development purposes and tests. When clear, everything will be moved back to “frontpage.html” 
+-	The “invite user” in “myaccount” page now works as intended.
+Other things I might have forgotten 😅
+
+More updates coming soon! 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
 =====================================================
 - Mise à jour 26/7/2021 (Application rénovée)
 ====================================================

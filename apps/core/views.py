@@ -10,9 +10,18 @@ from apps.userprofile.models import Userprofile
 #Import functionalities from Django
 from django.shortcuts import render,redirect
 
+from apps.articles.models import Categories, Articles
+
 # Create your views here.
 def frontpage(request):
-    return render(request, 'core/frontpage.html')
+    categories = Categories.objects.all()
+    articles = Articles.objects.all()
+    context = {
+        'categories':categories,
+        'articles' : articles
+    }
+    
+    return render(request, 'core/frontpage1.html', context)
 
 def privacy(request):
     return render(request, 'core/privacy.html')

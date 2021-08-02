@@ -19,7 +19,7 @@
         <div class="column is-8 is-offset-2">
             <div class="columns is-align-items mt-6">
                 <div class="column is-4 image">
-                    <img src="{% static 'images/unsplash2.jpg' %}">
+                    <img src="{{user.userprofile.get_avatar}}">
                 </div>
                 
                 <div class="column is-8 text">

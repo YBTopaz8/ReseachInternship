@@ -42,26 +42,88 @@
     </div>
     {% endif %}
 
-    <div class="columns">
+            <!--<div class="columns">
         <div class="column is-12">
-         
-            <a href="{% url 'team:add' %}" class="button is-success">Add team</a>
-        </div>
+         <a href="{% url 'team:add' %}" class="button is-success">Add team</a>
+        </div>-->
     </div>
+
+    <a href="{% url 'add_article' %}" class="button is-link">Add Article</a>
+
+    <br>
+    <div></div>
+
+
+
+<div>
+   
+    <table class="table is-hoverable is-bordered is-fullwidth is-striped is-narrow">
+    <thead>
+        <tr>
+            <th style="width: 300px;"><abbr title="Position">Article Code</abbr></th>
+            <th style="width: 300px;">Article Title</th>
+            <th style="width: 300px;">Article Category </th>
+            <th style="width: 300px;">Article Summary</th>
+            <th style="width: 300px;">Article Volume</th>
+            <th style="width: 300px;">Article Publication Date</th>
+            <th style="width: 300px;">Published By</th>
+            <th style="width: 300px;">Edit Article</th>
+            <th style="width: 300px;">More</th>
+            
+        </tr> 
+    </thead>
+    <tfoot>
+        {% for items in articles %}
+        {% if items.art_publisher == request.user %}
+        <tr>
+           <td style="width: 300px;">{{items.art_code}} </td> 
+           <td style="width: 300px;">{{items.art_title}} </td>
+           <td style="width: 300px;">{{items.art_category}} </td>
+           <td style="width: 300px;">{{items.art_description}} </td>
+           <td style="width: 300px;">{{items.art_volume}} </td> 
+           <td style="width: 300px;">{{items.art_date}} </td> 
+           <td style="width: 300px;">You </td>
+           <td style="width: 300px;"><a href="{% url 'edit_art' items.art_code %}" class="button is-info">Edit </a></td>
+           <td style="width: 300px;"><a href="{% url 'del_art' items.art_code %}" class="button is-danger">Delete</a></td>
+           {% else %} 
+           <td style="width: 300px;">{{items.art_code}} </td> 
+           <td style="width: 300px;">{{items.art_title}} </td>
+           <td style="width: 300px;">{{items.art_category}} </td>
+           <td style="width: 300px;">{{items.art_description}} </td>
+           <td style="width: 300px;">{{items.art_volume}} </td> 
+           <td style="width: 300px;">{{items.art_date}} </td> 
+           <td style="width: 300px;">{{items.art_publisher}} </td> 
+           <td style="width: 300px;"><a href="#" class="button is-success">View </a></td>
+           <td style="width: 300px;"></td>
+        {% endif %}
+
+        </tr>
+        
+      
+    {% endfor %}
+    </tfoot> 
+    </table>
+    
+</div>
+    <!--<p>test this wasn't published by you</p>-->
+ 
+
+
+<br><br>
  <div class="columns">
         {% if active_team %}
             <div class="column is-4">
                 <div class="notification has-background-success-light">
-                    <h3 class="is-size-5">{{ active_team.title }}{% if active_team.created_by == request.user %}(Owner){% else %}(Member){% endif %}</h3>
+                    <h3 class="is-size-5">{{ active_team.title }}{% if active_team.created_by == request.user %}(You are the Owner){% else %}(Member){% endif %}</h3>
                 
-                    <h3 class="is-size-6">SHOW PLAN HERE</h3>
+                    <h3 class="is-size-6">You are a Member of this team</h3>
 
                     <hr>
 
                     <a href="{% url 'team:team' active_team.id %}" class="button is-success">Details</a>
 
                     {% if active_team.created_by == request.user %}
-                        <a href="#" class="button is-info">Invite users</a>
+                        <a href="{% url 'team:invite' %}" class="button is-info">Invite users</a>
                     {% endif %}
                 </div>
             </div>
@@ -72,7 +134,7 @@
                 <div class="notification">
                     <h3 class="is-size-5">{{ team.title }}{% if team.created_by == request.user %}(Owner){% else %}(Member){% endif %}</h3>
                 
-                    <h3 class="is-size-6">SHOW PLAN HERE</h3>
+                    <h3 class="is-size-6">You are a Member of this team</h3>
 
                     <hr>
 

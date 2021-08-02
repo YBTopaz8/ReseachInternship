@@ -4,7 +4,6 @@ from django.conf.urls import url
 from django.urls import path
 
 from .views import add, team, edit,activate_team, invite
-
 app_name = 'team'
 
 urlpatterns = [
@@ -13,4 +12,5 @@ urlpatterns = [
     path('invite/', invite, name='invite'),
     path('activate_team/<int:team_id>', activate_team, name='activate_team'),
     path('<int:team_id>/', team, name='team'),
+    
 ]

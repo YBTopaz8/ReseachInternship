@@ -35,8 +35,8 @@ LOGIN_REDIRECT_URL = 'myaccount'
 LOGOUT_REDIRECT_URL = 'frontpage'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'YOUR GOOGLE EMAIL'
-EMAIL_HOST_PASSWORD = 'YOUR GOOGLE PASSWORD'
+EMAIL_HOST_USER = '8brunel@gmail.com'
+EMAIL_HOST_PASSWORD = 'Yvanbrunel8'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_EMAIL_FROM = 'Internship <noreply@YvanBrunel.proj>'
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.userprofile',
     'apps.team',
+    'apps.articles',
     
     
 ]

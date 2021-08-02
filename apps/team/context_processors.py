@@ -8,7 +8,7 @@ from .models import Team
 
 def active_team(request):
     if request.user.is_authenticated:
-        pass
+        
     
         if request.user.userprofile.active_team_id:
             team = Team.objects.get(pk=request.user.userprofile.active_team_id)

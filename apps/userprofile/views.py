@@ -1,3 +1,4 @@
+from apps.articles.models import Articles
 from django.core.mail.message import EmailMultiAlternatives
 from django.http.response import HttpResponse
 from apps.team.utilities import send_invitation_accepted
@@ -21,13 +22,14 @@ from apps.team.models import Invite, Team
 def myaccount(request):
     teams = request.user.teams.exclude(pk=request.user.userprofile.active_team_id)
     invitations = Invite.objects.filter(email=request.user.email, status=Invite.INVITED)
+    articles = Articles.objects.all()
     
     
-    
-    return render(request, 'userprofile/myaccount.html',{'teams' : teams, 'invitations':invitations})
+    return render(request, 'userprofile/myaccount.html',{'teams' : teams, 'invitations':invitations, 'articles':articles})
 
 @login_required
 def edit_profile(request):
+    
     if request.method == 'POST':
         request.user.first_name = request.POST.get('first_name', '')
         request.user.last_name = request.POST.get('last_name', '')
@@ -42,6 +44,7 @@ def edit_profile(request):
         
         messages.info(request, 'The changes were Saved!')    
         return redirect('myaccount')
+    
     return render(request, 'userprofile/edit_profile.html')
     
 

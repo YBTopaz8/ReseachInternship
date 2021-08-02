@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock title %} Project</title>
     
+   
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
 </head>
@@ -28,8 +31,8 @@
                         
                         <a href="{% url 'myaccount' %}" class="button is-success">Welcome {% firstof request.user.get_full_name request.user.username%} {% if active_team.title %}({{active_team.title}}){% endif %}</a>
                     {% else %}
-                       <!-- <a href="{% url 'signup' %}" class="button is-success"> <strong>Sign Up</strong></a>
-                        <a href="{% url 'login' %}" class="button">Log In</a>-->
+                       <!-- <a href="{% url 'signup' %}" class="button is-success"> <strong>Sign Up</strong></a>-->
+                        <a href="{% url 'login' %}" class="button is-success">Log In</a>
                     {% endif %}
                     </div>
                 </div>
