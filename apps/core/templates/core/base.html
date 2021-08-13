@@ -28,8 +28,13 @@
                 <div class="navbar-item">
                     <div class="buttons">
                     {% if request.user.is_authenticated %}
+                        {% if request.user.userprofile.is_leader %}
+                        <a href="{% url 'admin_dashboard' %}" class="button is-success">Welcome {% firstof request.user.get_full_name request.user.username%} {% if active_team.title %}({{active_team.title}}){% endif %}</a>  
                         
+                        {% else %}
                         <a href="{% url 'myaccount' %}" class="button is-success">Welcome {% firstof request.user.get_full_name request.user.username%} {% if active_team.title %}({{active_team.title}}){% endif %}</a>
+                        {% endif %}
+                        
                     {% else %}
                        <!-- <a href="{% url 'signup' %}" class="button is-success"> <strong>Sign Up</strong></a>-->
                         <a href="{% url 'login' %}" class="button is-success">Log In</a>
@@ -82,7 +87,8 @@
 
         <script src="https://unpkg.com/vue@next"></script>
  {% block scripts %}
-        {% endblock %}
+    
+ {% endblock %}
 
 </body>
 </html>

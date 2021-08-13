@@ -8,7 +8,7 @@
 
 <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="/">Home Page</a></li>
         <li><a href="{% url 'myaccount' %}">My account</a></li>
         <li class="is-active"><a href="{% url 'edit_art' art_code %}" aria-current="page">Add an Article</a></li>
     </ul>
@@ -39,8 +39,11 @@
                     <!--<input type="text" class="select" name="category" placeholder="Enter Article Title">-->
                    <div class="select">
                         <select name="art_category" id="" >
+                            
                             {% for items in cat %}
-                              <option>{{items.name}}</option>
+                                
+                             <option  selected > {{items.name}}</option>
+                                
                             {% endfor %}
                         </select> 
                     </div>
@@ -52,7 +55,7 @@
                 <div class="control">
                     <!--<input type="text" class="select" name="category" placeholder="Enter Article Title">-->
                    
-                        <textarea name="art_description" class="textarea"></textarea>
+                        <textarea name="art_description" class="textarea" >{{article.art_description}}</textarea>
             </div>
 
             <div class="field">
@@ -69,10 +72,10 @@
                 </div>
             </div>
 
-            <div class="field">
-                <label class="label">Published Date</label>
+            <div class="field"> <!--TO SET THE DATE ON FRONT END CALENDAR, USE {{article.art_date|date:'Y-m-d'}}-->
+                <label class="label">Published Date (MM-DD-YYYY)</label>
                 <div class="control">
-                    <input type="date" class="input" name="art_date" > Current: {{article.art_date}}
+                    <input type="date" class="input" name="art_date"  value="{{article.art_date|date:'Y-m-d'}}">
                 </div>
             </div>
 

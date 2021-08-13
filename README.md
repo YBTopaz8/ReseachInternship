@@ -9,6 +9,50 @@ lorsque l'utilisateur se connecte, le système doit être capable de reconnaîtr
 un code ne peut être utilisé qu'UNE SEULE FOIS.
 
 ================================================================================
+- Mise à jour 13/8/2021 ( implémentation de la gestion administrative)
+================================================================================
+
+Après avoir ajouté les fonctionnalités utilisateur (ajouter/modifier/supprimer)
+J'ai décidé de passer à la section d'administration afin de la rendre utilisable et attrayante.
+Pour cela, j'ai fait ce qui est expliqué ci-dessous.
+Changelog complet, NOTES D'INSTALLATION ENCORE PLUS LOIN, donc essayez de les suivre attentivement afin d'être prêt à commencer ;
+Ajouté :
+- Page d'accueil de l'administrateur où les informations de base sur les utilisateurs et les articles peuvent être vues.
+- Ajouté des onglets pour gérer les articles (ajouter/modifier/supprimer fonctionne bien)
+- Ajouté des onglets pour gérer les catégories (ajout/modification/suppression fonctionne bien)
+- Ajout d'un onglet pour gérer les paramètres d'administration actuels.
+- Ajout d'une fonctionnalité de déconnexion
+o Page d'accueil
+Ajout de la possibilité de télécharger tout document en cliquant sur le titre. Ceci n'était qu'un test pour s'assurer que ladite fonctionnalité fonctionne décemment.
+Je prévois de retravailler/réorganiser totalement la page d'accueil afin qu'elle soit plus adaptée au design que j'ai en tête. Il s'agit d'accueillir les "projets", les "articles", les "membres" et les "sujets de recherche", ainsi que les rubriques "Qui sommes-nous" et "Contactez-nous". 
+Je prévois de retravailler l'interface d'administration pour qu'elle ait un hamburger (menu latéral), c'est plus naturel de cette façon et je vais ajouter la possibilité de gérer les utilisateurs existants en tant qu'administrateur.
+Ces nouveautés devraient être intégrées dans la prochaine mise à jour, mardi prochain en principe. 
+
+
+ENGLISH:
+
+================================================================================
+Update 02/8/2021 (Admin Back End Implementation)
+================================================================================
+After adding user functionalities (add/edit/delete)
+I decided to move to the admin section in order to make it useable and appealing
+To that, I did the following explained below.
+Full Changelog, INSTALLATION NOTES EVEN FURTHER BELOW, so endeavor to follow them keenly in order to be able to be good to go;
+Added:
+-	Admin landing page where basic information about users and articles can be seen
+-	Added tabs to manage articles (add/edit/delete working well)
+-	Added tabs to manage categories (add/edit/delete working well)
+-	Added a tab to manage the current admin settings.
+-	Added logout functionality
+o	Landing page
+	Added the ability to download any document by clicking on the title. This was just a test to make sure that the said functionality works decently.
+I plan to rework/revamp the front-end page totally in order to be more suitable with the design I have in mind. That is to accommodate “Projects”, “articles”, “members” and “Research topics” + about us and contact us. 
+I plan to rework the admin interface for it to have a hamburger (side menu) it feels more natural that way and I will add the possibility to manage existing users as an admin.
+Those should ship in the next update, next week Tuesday hopefully 
+
+
+
+================================================================================
 - Mise à jour 02/8/2021 (Fonctionnalités utilisateur implémentées)
 ================================================================================
 

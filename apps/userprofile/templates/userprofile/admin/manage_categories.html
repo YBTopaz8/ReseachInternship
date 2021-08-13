@@ -1,0 +1,70 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col" style="text-align: center;">
+      
+      {% if messages %}
+{% for message in messages %}
+    <div class="notification is-info" style="color: white; font-size: larger;"> {{ message }} </div>
+{% endfor %}
+
+{% endif %}
+  </div>
+</div>
+
+<div class="container mt-12">
+  
+    <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+      <h2 class="tm-block-title" style="text-align: center; color: chocolate;">Product Categories</h2>
+      <div class="tm-product-table-container">
+      
+        <table class="table tm-table-small tm-product-table">
+         <thead style="color: rgb(30, 233, 199);">
+          <th>Category ID </th>
+          <th>Category Name </th>
+          <th>Number of Articles </th>
+          <th>Edit </th>
+          <th>Delete </th>
+
+         </thead>
+
+
+          <tbody>
+           {% for category in cat %}
+             
+           
+            <tr>
+              <td class="tm-product-name">{{category.id}}</td>
+              <td class="tm-product-name">{{category.name}}</td>
+              
+              <td class="tm-product-name">{{g.name}}</td>
+                
+              <td>
+                <a href="{% url 'edit_cat' category.name %}"  class="tm-product-delete-link">
+                  <i class="far fa-edit tm-product-delete-icon"></i>
+                </a>
+              </td>
+              
+              <td class="text-center">
+                <a href="{% url 'del_cat' category.name %}" class="tm-product-delete-link">
+                  <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- table container -->
+      <a class="btn btn-primary btn-block text-uppercase mb-3" href="{% url 'add_cat' %}">
+       Add new category
+      </a>
+    </div>
+  </div>
+
+{% endblock content %}
+

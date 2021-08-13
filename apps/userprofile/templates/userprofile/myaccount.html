@@ -3,10 +3,11 @@
 {% block title %}My Account | {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <nav class="breadcrumb" arial-label="breadcrumbs">
         <ul>
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="/">Home Page</a></li>
             <li class="is-active"><a href="{% url 'myaccount' %}" aria-current="page">My account</a></li>
         </ul>
     </nav>
@@ -47,8 +48,10 @@
          <a href="{% url 'team:add' %}" class="button is-success">Add team</a>
         </div>-->
     </div>
-
-    <a href="{% url 'add_article' %}" class="button is-link">Add Article</a>
+    
+    <a href="{% url 'add_article' %}" class="button is-link">
+        <i class="fas fa-plus-square"></i> &nbsp 
+     Add Article</a>
 
     <br>
     <div></div>
@@ -83,8 +86,9 @@
            <td style="width: 300px;">{{items.art_volume}} </td> 
            <td style="width: 300px;">{{items.art_date}} </td> 
            <td style="width: 300px;">You </td>
-           <td style="width: 300px;"><a href="{% url 'edit_art' items.art_code %}" class="button is-info">Edit </a></td>
-           <td style="width: 300px;"><a href="{% url 'del_art' items.art_code %}" class="button is-danger">Delete</a></td>
+           <td style="width: 300px;">
+            <a href="{% url 'edit_art' items.art_code %}" class="button is-info">Edit  &nbsp <i class="fas fa-edit"></i></a></td>
+           <td style="width: 300px;"><a href="{% url 'del_art' items.art_code %}" class="button is-danger">Delete  &nbsp<i class="fas fa-trash-alt"></i></a></td>
            {% else %} 
            <td style="width: 300px;">{{items.art_code}} </td> 
            <td style="width: 300px;">{{items.art_title}} </td>
@@ -93,7 +97,7 @@
            <td style="width: 300px;">{{items.art_volume}} </td> 
            <td style="width: 300px;">{{items.art_date}} </td> 
            <td style="width: 300px;">{{items.art_publisher}} </td> 
-           <td style="width: 300px;"><a href="#" class="button is-success">View </a></td>
+           <td style="width: 300px;"><a href="#" class="button is-success">View  &nbsp <i class="fas fa-eye"></i></a></td>
            <td style="width: 300px;"></td>
         {% endif %}
 

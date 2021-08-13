@@ -35,7 +35,15 @@
         </div>
     </div>
     <!-- End Banner Hero -->
-
+    <div class="col" style="text-align: center;">
+      
+        {% if messages %}
+  {% for message in messages %}
+      <div class="notification is-info" style="color: white; font-size: larger;"> {{ message }} </div>
+  {% endfor %}
+  
+  {% endif %}
+    </div>
 
 
     <!-- Start Service -->
@@ -68,7 +76,7 @@
                    
                  
                    <li class="nav-item mx-lg-4">     
-                     <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#"  data-filter= ".{{item.name}}"  ">{{item.name}}</a>  
+                     <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#"  data-filter= ".{{item.name}}"  >{{item.name}}</a>  
                     </li>
 
                     {% endfor %}
@@ -85,19 +93,24 @@
 
             <!-- Start Recent Work -->
             {% for articless in articles %}
-              
+            <!--this works <a href="{{articless.art_document.url}}" download="{{articless.art_document.url}}"></a> -->
             
+                    
             <div class="col-xl-3 col-md-4 col-sm-6 project {{articless.get_category}}">
-                <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0" style="height: 350px;">
+                <div class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0" style="height: 350px;" >
                     <img class="service card-img" src="{{articless.get_art_cover}}" alt="Card image" style="width: 300px; height: 350px;">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
-                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{articless.art_title}}</span>
+                           
+                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"><a href="{{articless.art_document.url}}" download="{{articless.art_document.url}}" style="text-decoration: none; color: white;">{{articless.art_title}} sss</a></span>
+                            
                             <p class="card-text">{{articless.art_description}}</p>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
+           
+           
             {% endfor %}
             <!-- End Recent Work -->
             

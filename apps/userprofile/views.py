@@ -24,8 +24,13 @@ def myaccount(request):
     invitations = Invite.objects.filter(email=request.user.email, status=Invite.INVITED)
     articles = Articles.objects.all()
     
+    if request.user.userprofile.is_leader:
+       messages.info(request,'Welcome Admin!')
+       #return render(request, 'userprofile/admin/account_index.html', {}) 
+       return render(request, 'core/frontpage1.html', {}) 
+    else:
     
-    return render(request, 'userprofile/myaccount.html',{'teams' : teams, 'invitations':invitations, 'articles':articles})
+        return render(request, 'userprofile/myaccount.html',{'teams' : teams, 'invitations':invitations, 'articles':articles})
 
 @login_required
 def edit_profile(request):

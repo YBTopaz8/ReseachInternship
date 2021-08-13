@@ -1,0 +1,119 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col" style="text-align: center;">
+      
+      {% if messages %}
+{% for message in messages %}
+    <div class="notification is-info" style="color: white; font-size: larger;"> {{ message }} </div>
+{% endfor %}
+
+{% endif %}
+  </div>
+</div>
+
+<div class="container mt-12">
+    <div class="row tm-content-row">
+      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col" >
+        <form action="." method="post">
+            {% csrf_token %}
+          <div class="tm-bg-primary-dark tm-block tm-block-products" >
+          <div class="tm-product-table-container" >
+          
+          
+           
+            <table class="table table-hover tm-table-small tm-product-table" >
+              <thead>
+                <tr style="color: rgb(30, 233, 199);">
+                  <th scope="col">&nbsp;</th>
+
+                  <th scope="col"><abbr title="Position">Article Code</abbr></th>
+                  <th scope="col">Article Title</th>
+                  <th scope="col">Article Category </th>
+                  <th scope="col">Article Summary</th>
+                  <th scope="col">Article Volume</th>
+                  <th scope="col">Article Publication Date</th>
+                  <th scope="col">Published By</th>
+                  <th scope="col">Edit Article</th>
+                  <th scope="col">Delete</th>
+                  
+                </tr>
+              </thead>
+              <tbody style="cursor: pointer;">
+                {% for items in articles %}
+                {% if items.art_publisher == request.user %}
+                <tr >
+                  <th scope="row"><input type="checkbox" name="IDss" value="{{items.art_code}}"/></th>
+                  <td scope="row">{{items.art_code}} </td> 
+                  <td class="tm-product-name">{{items.art_title}} </td>
+                  <td scope="row">{{items.art_category}} </td>
+                  <td scope="row">{{items.art_description}} </td>
+                  <td scope="row">{{items.art_volume}} </td> 
+                  <td scope="row">{{items.art_date}} </td> 
+                  <td scope="row" style="color: rgb(54, 190, 243); font-weight: 600; font-size: larger;">You </td>
+                 
+                  <td>
+                    <a href="{% url 'edit_art_admin' items.art_code %}"  class="tm-product-delete-link">
+                      <i class="far fa-edit tm-product-delete-icon"></i>
+                    </a>
+                  </td>
+
+                  <td>
+                    <a href="{% url 'del_art_admin' items.art_code %}"class="tm-product-delete-link">
+                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                    </a>
+                  </td>
+                  
+                  {% else %}
+                  <th scope="row"><input type="checkbox" name="IDss" value="{{items.art_code}}"/></th>
+                  <td>{{items.art_code}} </td> 
+                  
+                  <td class="tm-product-name">{{items.art_title}} </td>
+                  <td scope="row">{{items.art_category}} </td>
+                  <td scope="row">{{items.art_description}} </td>
+                  <td scope="row">{{items.art_volume}} </td> 
+                  <td scope="row">{{items.art_date}} </td> 
+                  <td scope="row" style="color: rgb(228, 171, 161);">{{items.art_publisher}} </td>
+                 
+                  <td>
+                    <a href="{% url 'edit_art_admin' items.art_code %}"  class="tm-product-delete-link">
+                      <i class="far fa-edit tm-product-delete-icon"></i>
+                    </a>
+                  </td>
+
+                  <td>
+                    <a href="{% url 'del_art_admin' items.art_code %}"class="tm-product-delete-link">
+                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                    </a>
+                  </td>
+                 
+
+                  {% endif %}
+                </tr>
+               
+                {% endfor %}
+
+              </tbody>
+            </table>
+       
+          </div>
+          <!-- table container -->
+          
+          <a
+            href="{% url 'add_articles_admin' %}"
+            class="btn btn-info btn-block text-uppercase mb-3">Add Article</a>
+          <button  class="btn btn-danger btn-block text-uppercase" 
+              href="{% url 'manage_articles' %}">
+            Delete selected Article</button>
+          </a>
+        </div>
+      </form>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}

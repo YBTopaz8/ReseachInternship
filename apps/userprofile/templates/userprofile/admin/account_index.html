@@ -1,0 +1,96 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  
+<div class="container-fluid" >
+    <div class="row" style="text-align: center; color: chocolate;">
+        <div class="col">
+            <p class="text-white mt-5 mb-5">Welcome back, <b>{% firstof request.user.get_full_name request.user.username %}</b>
+                </p>
+            {% if messages %}
+      {% for message in messages %}
+          <div class="notification is-info"> {{ message }} </div>
+      {% endfor %}
+
+  {% endif %}
+        </div>
+    </div>
+  
+    <div class="col-12 tm-block-col" style="height: 350px;">
+      <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll" style="height: 50px;">
+          
+          <h2 class="tm-block-title" style="text-align: center; background-color: cornflowerblue; border-radius: 10px; font-size: 30px;">Users Table</h2>
+          <table class="table" style="height: 200px;">
+              <thead>
+                  <tr style="color: rgb(7, 248, 99);">
+  
+                      <th scope="col" style="width: 300px;">User ID</th>
+                      <th scope="col" style="width: 300px;">Username</th>
+                      <th scope="col" style="width: 300px;">User First Name </th>
+                      <th scope="col" style="width: 300px;">User Last Name</th>
+                      <th scope="col" style="width: 300px;">User Team</th>
+        
+                    </tr>
+              </thead>
+              <tbody>
+                {% for users in user %}
+                
+                  <tr>
+                      <td style="width: 300px;" scope="row">{{users.id}} </td> 
+                      <td style="width: 300px;">{% firstof users.get_full_name users.username %} </td>
+                      <td style="width: 300px;">{{users.first_name}} </td>
+                      <td style="width: 300px;">{{users.last_name}} </td>
+                      <td style="width: 300px;">{{users.userprofile.get_team_name}} </td> 
+                     
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+ 
+        <div class="col-12 tm-block-col"  >
+            <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll" >
+                <h2 class="tm-block-title" style="text-align: center; background-color: cornflowerblue; border-radius: 10px; font-size: 30px;">Articles Table</h2>
+                <table class="table" style="height: 300px;">
+                    <thead>
+                        <tr style="color: rgb(34, 231, 238);">
+  
+                            <th scope="col" style="width: 250px;">Article Code</th>
+                            <th scope="col" style="width: 250px;">Article Title</th>
+                            <th scope="col" style="width: 250px;">Article Category </th>
+                            <th scope="col" style="width: 250px;">Article Summary</th>
+                            <th scope="col" style="width: 250px;">Article Volume</th>
+                            <th scope="col" style="width: 250px;">Article Publication Date</th>
+                            <th scope="col" style="width: 250px;">Published By</th>
+                            <th scope="col" style="width: 250px;">Article Cover</th>
+          
+                          </tr>
+                    </thead>
+                    <tbody style="height: 50px;">
+                      {% for items in articles %}
+                        
+                      
+                        <tr>
+                            <td style="width: 250px;" scope="row">{{items.art_code}} </td> 
+                            <td style="width: 250px;">{{items.art_title}} </td>
+                            <td style="width: 250px;">{{items.art_category}} </td>
+                            <td style="width: 250px;">{{items.art_description}} </td>
+                            <td style="width: 250px;">{{items.art_volume}} </td> 
+                            <td style="width: 250px;">{{items.art_date}} </td> 
+                            <td style="width: 250px;">{{items.art_publisher}} </td> 
+                            <td style="width: 250px; "> <img src="{{items.get_art_cover}}" style="height: 50px;" alt="" > </td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+     
+    </div>
+  
+{% endblock content %}

@@ -1,0 +1,158 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+ <div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <form action="." method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+    
+          <div class="row">
+              
+            <div class="col-12">
+              <h2 style="margin-bottom: -39px;" class="tm-block-title d-inline-block">Add Product</h2>
+              
+              <br> Code <input style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0); color: rgb(52, 212, 233);" name="art_code" value="A{{code}}" readonly></input>
+            
+            </div>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+              <form action="" class="tm-edit-product-form">
+                <div class="form-group mb-3">
+                  <label
+                    for="name"
+                    >Title
+                  </label>
+                  <input
+                    id="name"
+                    name="art_title"
+                    type="text"
+                    class="form-control validate"
+                    
+                    required
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label
+                    for="description"
+                    >Article Details</label
+                  >
+                  <textarea
+                    class="form-control validate"
+                    rows="3"
+                    name="art_description"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group mb-3">
+                  <label
+                    for="category"
+                    >Category</label
+                  >
+                  <select
+                    class="custom-select tm-select-accounts"
+                    name="art_category"
+                    id="category"
+                  >
+                  {% for items in cat %}
+                                
+                  <option  selected > {{items.name}}</option>
+                     
+                 {% endfor %}
+                  </select>
+                </div>
+                <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                        <label
+                          for="expire_date"
+                          >Published Date
+                        </label>
+                        <input
+                          id="expire_date"
+                          name="art_date"
+                          type="date"
+                          class="form-control validate"
+                          data-large-mode="true"
+                        />
+                      </div>
+                      <div class="form-group mb-3 col-xs-12 col-sm-6">
+                        <label
+                          for="stock"
+                          >Article Volume
+                        </label>
+                        <input
+                          id="stock"
+                          name="art_volume"
+                          type="number"
+                          class="form-control validate"
+                          value="1"
+                          required
+                        />
+                      </div>
+                </div>
+                
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+              <div class="form-group mb-3">
+                <label
+                  for="category"
+                  >Publisher</label
+                >
+                <select
+                  class="custom-select tm-select-accounts"
+                  name="art_publisher"
+                  id="category"
+                >
+                {% for items in profile %}
+                              
+                <option > {{items.email}}</option>
+                   
+               {% endfor %}
+                </select>
+              </div>
+              <div style="height: 174px;" class="tm-product-img-dummy mx-auto">
+                <img style="height:100px"  src="{% static "images/article_205px.png" %}" alt="Product image" class="img-fluid d-block mx-auto"   onclick="document.getElementById('fileInput').click();">
+                
+              </div>
+              <div class="custom-file mt-3 mb-3">
+                <input id="fileInput"  name="art_cover"  type="file" style="display:none;" />
+                <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="UPLOAD PRODUCT IMAGE"
+                  onclick="document.getElementById('fileInput').click();"
+                />
+              </div>
+              
+              
+              <div class="custom-file mt-3 mb-3">
+                <label for=""> Article Document</label>
+                <input id="artDoc" name="art_document" type="file" style="display:none;" />
+               <!----> <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="UPLOAD Article Document"
+                  name="art_document"
+                  onclick="document.getElementById('artDoc').click();"
+                />
+              </div>
+
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Article Now</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+{% endblock content %}

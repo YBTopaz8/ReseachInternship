@@ -1,6 +1,8 @@
 
 #
-from django.http.response import HttpResponse, HttpResponseNotFound
+from django.http import response
+from django.http.request import RAISE_ERROR
+from django.http.response import Http404, HttpResponse, HttpResponseNotFound
 from apps.team.models import Invite
 from apps.userprofile.models import Userprofile
 from django.contrib.auth import login
@@ -22,6 +24,7 @@ def frontpage(request):
     }
     
     return render(request, 'core/frontpage1.html', context)
+
 
 def privacy(request):
     return render(request, 'core/privacy.html')
@@ -46,6 +49,7 @@ def reg(request):
 
 def register(request):
     
+        
     if request.method=='POST':
         form = UserCreationForm(request.POST)
         
@@ -92,3 +96,5 @@ def register(request):
       #      return HttpResponseNotFound('not a POST')
       #  return redirect('frontpage')
        # return render(request, 'core/signup.html', {'form': form})
+
+

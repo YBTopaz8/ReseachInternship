@@ -1,0 +1,121 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+ 
+
+{% block content %}
+<div class="row">
+  <div class="col" style="text-align: center;">
+      
+      {% if messages %}
+{% for message in messages %}
+    <div class="notification is-info" style="color: rgb(221, 151, 94); font-size: larger;"> {{ message }} </div>
+{% endfor %}
+
+{% endif %}
+  </div>
+</div>
+
+<div class="container mt-12">
+  
+  <div class="row tm-content-row">
+    <div class="col-12 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <h2 class="tm-block-title" style="text-align: center;">Account's Info</h2>
+        <div>
+        <p>Your Email : <b style="color: rgb(126, 183, 206);">{{user.email}}</b></p> 
+        <p>Your Username : <b style="color: rgb(126, 183, 206);">{% firstof user.get_full_name user.username %}</b></p>
+        {% if user.userprofile.is_leader %}
+        <p>You are an <b style="color: rgb(126, 183, 206);">Administrator</b></p>
+        {% else %}
+        <p>You aren't</p>
+        {% endif %}
+
+        {% if active_team %}
+          {% if active_team.created_by == request.user %}
+             <p>You are the owner of the team: <b style="color: rgb(126, 183, 206);"><a href="{% url 'team:team' active_team.id %}">{{active_team.title}}</a></b></p>
+          {% endif %}
+          
+        {% endif %}
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+        <h2 class="tm-block-title">Account Settings</h2>
+        <form method="post" action="." enctype="multipart/form-data" class="tm-signup-form row">
+          {% csrf_token %}
+          <div class="form-group col-lg-6">
+            <label for="name">First Name</label>
+            <input
+              id="name"
+              name="first_name"
+              type="text"
+              value="{{user.first_name}}"
+              class="form-control validate"
+            />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="password2">Last Name</label>
+            <input
+              id="name"
+              name="last_name"
+              value="{{user.last_name}}"
+              type="text"
+              class="form-control validate"
+            />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="email"> Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="form-control validate"
+            />
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="password">New Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              class="form-control validate"
+            />
+          </div>
+        
+          <br>
+          <div class="form-group col-lg-6" style="text-align: center;">
+            <label for="phone">Avatar</label>
+            <figure >
+              <img src="{{ request.user.userprofile.get_avatar }}" style="height: 150px;">
+          </figure>
+            <input
+              id="phone"
+              type="file"
+              name="img"
+              
+              class="form-control validate"
+            />
+          </div>
+    
+        
+       
+          <div class="col-12">
+            <button
+              
+              class="btn btn-primary btn-block text-uppercase"
+            >
+              Edit Your Account
+            </button>
+          </div>
+        </form>
+      </div>
+  </div>
+
+
+
+{% endblock content %}
+

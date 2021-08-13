@@ -1,0 +1,38 @@
+{% extends 'userprofile/admin/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label
+                          for="name"
+                          >Category Name
+                        </label>
+                        <input
+                          id="name"
+                          name="cat_name"
+                          type="text"
+                          class="form-control validate"
+                          
+                          required
+                        />
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Category Now</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
