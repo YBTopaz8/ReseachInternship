@@ -130,7 +130,7 @@ Choses à ajouter dans le futur :
 - Possibilité pour les invités de supprimer des utilisateurs.
 - Possibilité pour les utilisateurs de poster des articles sur la page d'accueil (simplement des images pour le moment).
 - Autres détails mineurs
-Pour accéder manuellement au login, tapez "http://127.0.0.1:8000/login/".
+
 Procédure d'installation :
 1.	Cloner/fork le projet
 2.	Activez l'environnement virtuel (env) en utilisant le terminal
@@ -142,7 +142,7 @@ b.	EDITER LA CONFIGURATION SMTP dans invitations/settings.py avec ce qui vous co
 6.	Créer un superutilisateur
 7.	Exécuter le serveur. NE PAS OUVRIR LE PROJET.
 8.	Parcourez les tables de votre base de données, allez à la table "userprofile_userprofile". Insérez un nouveau profil utilisateur en choisissant l'id du super utilisateur que vous avez créé. C'EST TOUT. C'est parce que le super-utilisateur n'a pas de profil d'utilisateur lorsqu'il est créé. Il est donc impossible d'utiliser l'application correctement. Cette étape n'est requise qu'une seule fois
-9.	Ouvrez un nouvel onglet et connectez-vous au projet via http://127.0.0.1:8000/login/.
+9.	Ouvrez un nouvel onglet et connectez-vous au projet 
 10.	Ajoutez une nouvelle équipe
 11.	Invitez des utilisateurs 
 12.	Testez l'application !
@@ -183,7 +183,7 @@ Things to be added in future:
 -	Ability for users to post articles in the front page (simply images for now)
 -	Other minor details
 
-To manually access the login type in “http://127.0.0.1:8000/login/"
+
 Installation procedure:
 1.	Clone/fork project
 2.	Activate virtual environment (env) using terminal
@@ -195,7 +195,7 @@ Installation procedure:
 6.	Create superuser
 7.	Run server. DO NOT OPEN PROJECT.
 8.	Browse your database tables go to “userprofile_userprofile” table. Insert new userprofile by choosing your created superuser id. THAT’S ALL. This is because, the superuser does not have a userprofile when it is created. So, it makes it impossible to use the app properly. This step is required only once
-9.	Open a new tab and login to the project through http://127.0.0.1:8000/login/
+9.	Open a new tab and login to the project 
 10.	Add a new team
 11.	Invite users 
 12.	Test the app!
