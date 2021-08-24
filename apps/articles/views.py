@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.core.exceptions import ObjectDoesNotExist
 
+
+import datetime
 import random
 from django.contrib.auth.decorators import login_required
 from .forms import Add_article
@@ -206,11 +208,13 @@ def deleteArticle(request, art_code):
 def admin_dashboard(request):
     articles = Articles.objects.all()
     user = User.objects.all()
+    test = 32
     context = {
         'articles':articles,
         'user':user,
+        't':test
     }
-    return render(request, 'userprofile/admin/account_index.html', context) 
+    return render(request, 'userprofile/admin2/dashboard.html', context) 
 
 def manage_articles(request):
     articles = Articles.objects.all()
@@ -229,7 +233,8 @@ def manage_articles(request):
         'articles' : articles
     }
     
-    return render(request, 'userprofile/admin/manage_articles.html', context)
+    return render(request, 'userprofile/admin2/manage_art.html', context)
+    #return render(request, 'userprofile/admin/manage_articles.html', context)
 
 def add_articles_admin(request):
   
@@ -272,14 +277,14 @@ def add_articles_admin(request):
                 Article.save()
  
                 messages.info(request, 'New Book Added with items!  ')
-                return redirect('admin_dashboard')
+                return redirect('manage_articles')
             else:
                 Article = Articles.objects.create(art_publisher=pub,art_title=art_title,
                                           art_code=art_code,art_description=art_description,art_category=cat,art_volume=art_volume,
                                           art_created_date=art_date)
                 #Article.save()
                 messages.info(request, 'New Book Added!')
-                return redirect('admin_dashboard')
+                return redirect('manage_articles')
     
     article=''.join(random.choice('1234567890') for i in range(6))
     
@@ -298,7 +303,7 @@ def add_articles_admin(request):
         #'articles':profile
         }
     
-    return render(request, 'userprofile/admin/add_article_admin.html',context )
+    return render(request, 'userprofile/admin2/add_art.html',context )
 
 def edit_article_admin(request, art_code):
     print(art_code)
@@ -323,9 +328,10 @@ def edit_article_admin(request, art_code):
         print(art_description)
         print("publisher is "+ art_publisher)
         print(art_volume)
+        
         print(art_date)
-        
-        
+        a= datetime.datetime.strptime(art_date, '%d %B %Y').strftime('%Y-%m-%d')
+        print(a)
         cat = get_object_or_404(Categories, name=art_category)
         print(cat)
         
@@ -347,9 +353,10 @@ def edit_article_admin(request, art_code):
             #Articles.objects.create(art_cover=art_cover, art_document=art_document)
             articleSave = Articles.objects.filter(art_code=art_code).update(art_publisher=pub,art_title=art_title,
                                         art_code=art_code,art_category=cat,art_description=art_description,art_volume=art_volume,
-                                        art_date=art_date)
+                                        art_date=a)
             articless= Articles.objects.get(art_code=art_code)
             articless.art_cover=art_cover
+            
             articless.art_document=art_document
             articless.save()
                 
@@ -361,7 +368,7 @@ def edit_article_admin(request, art_code):
             
             articleSave = Articles.objects.filter(art_code=art_code).update(art_publisher=pub,art_title=art_title,
                                         art_code=art_code,art_description=art_description,art_category=cat,art_volume=art_volume,
-                                        art_date=art_date)
+                                        art_date=a)
              #Article.save()
             messages.info(request, 'Book updated! without files')
             return redirect('manage_articles')
@@ -382,7 +389,7 @@ def edit_article_admin(request, art_code):
         'cat':cat,
         'profile':profile
     }
-    return render(request, 'userprofile/admin/edit_article_admin.html', context) 
+    return render(request, 'userprofile/admin2/edit_art.html', context) 
     
 
 def deleteArticleAdmin(request, art_code):
@@ -393,9 +400,30 @@ def deleteArticleAdmin(request, art_code):
  
     return redirect('manage_articles')
 
+def delArtsAdmin(request):
+    articles = Articles.objects.all()
+   
+    if request.method == 'POST':
+        checkboxIDs = request.POST.getlist('IDss','failed')
+        for item in checkboxIDs:
+            print(item)
+            deleteArticle = Articles.objects.get(art_code=item)
+            print(deleteArticle)
+            deleteArticle.delete()
+        messages.info(request, 'Articles Deleted !  ')
+        return redirect('manage_articles')
+    
+    context = {
+        'articles' : articles
+    }
+    
+    return render(request, 'userprofile/admin2/delete_arts.html', context)
+    #return render(request, 'userprofile/admin/manage_articles.html', context)
 
 def manage_categories(request):
-    cat = list(Categories.objects.all())
+    cat = Categories.objects.all()
+    
+    
     """
     ss= list(Articles.objects.values_list("art_category", flat=True))
     ff = []
@@ -432,11 +460,10 @@ def manage_categories(request):
     """
     context = {
         "cat" : cat,
-     
         
             
     }
-    return render(request, 'userprofile/admin/manage_categories.html',context)
+    return render(request, 'userprofile/admin2/manage_cat.html',context)
 
 def add_cat(request):
     
@@ -448,49 +475,50 @@ def add_cat(request):
         Category = Categories.objects.create(name=Cat_name_fix)
         Category.save()
         messages.info(request, 'New Category Added !  ')
-        return redirect('admin_dashboard')
+        return redirect('manage_categories')
     return render(request, "userprofile/admin/add_cat.html")
 
 
-def delete_cat(request, cat_name):
-    
-    test = "Category " + cat_name+ " Deleted successfully"
-    deleteCat = Categories.objects.get(name=cat_name)
+def delete_cat(request, cat_id):
+    print(cat_id)
+    #test = "Category " + cat_name+ " Deleted successfully"
+    deleteCat = Categories.objects.get(id=cat_id)
     deleteCat.delete()
-    messages.info(request, test)
+    messages.info(request, "Category Deleted Successfully!")
     return redirect('manage_categories')
-
-def edit_cat(request, cat_name):
     
+
+def edit_cat(request):
+  
     if request.method =='POST':
-        cat_name_new= request.POST.get('cat_name_new', '')
-        Cat_name_fix=cat_name.replace(" ","_")
+        cat_id= request.POST.get('ee', 'failed')
+        print(cat_id)
+        cat_name_new= request.POST.get('tr', 'ssaas')
+        
+        Cat_name_fix=cat_name_new.replace(" ","_")
 
         print(Cat_name_fix)
-        cat = Categories.objects.filter(name=cat_name).update(name=Cat_name_fix)
-        messages.info(request, 'Category name updated !')
+        cat = Categories.objects.filter(id=cat_id).update(name=Cat_name_fix)
+        messages.info(request, 'Category Name Updated !')
         return redirect('manage_categories')
     
+    return redirect('manage_categories')
     
-    print(cat_name)
-    context = {
-        'name':cat_name
-    }
-    return render(request, "userprofile/admin/edit_cat.html", context)
+
 
 def manage_account(request):
-    
-   
     if request.method == 'POST':
-        
+       
         request.user.first_name = request.POST.get('first_name', '')
         request.user.last_name = request.POST.get('last_name', '')
         request.user.email = request.POST.get('email', '')
-        request.user.save()
-        
-       
-        if request.FILES:
             
+        request.user.save()
+            
+        
+
+        if request.FILES:
+                
             avatar = request.FILES['img']
             userprofile = request.user.userprofile
             userprofile.avatar = avatar
@@ -499,7 +527,24 @@ def manage_account(request):
             return redirect('manage_account')
         messages.info(request, 'The changes were Saved WITHOUT Image Update!')    
         
-        return redirect('manage_account')
         
-    
+        
     return render(request, 'userprofile/admin/manage_account.html', {})
+
+def edit_admin_prof(request):
+    
+    if request.method == 'POST':
+       
+            
+        request.user.first_name = request.POST.get('new_name', '')
+        request.user.last_name = request.POST.get('new_lname', '')
+        request.user.save()
+        if request.FILES:
+        
+            new_img = request.FILES['pic']
+            userprofile = request.user.userprofile
+            userprofile.avatar = new_img
+            userprofile.save()
+            messages.info(request, 'The changes were Saved with Image Update!') 
+        messages.info(request, 'The changes were Saved WITHOUT Image Update!') 
+    return render(request, 'userprofile/admin2/edit_admin_profile.html')

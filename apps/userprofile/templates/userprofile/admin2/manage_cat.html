@@ -1,0 +1,204 @@
+
+{% extends 'userprofile/admin2/base.html' %}
+{% load static %}
+
+{% block title %} Manage Articles |
+  
+{% endblock title %}
+
+{% block content %}
+
+<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Navigation Guide</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Manage Articles</li>
+								</ol>
+							</nav>
+						</div>
+                        
+						<div class="col-md-6 col-sm-12 text-right">
+							<div class="dropdown">
+								<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+									Choose
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="{% url 'add_articles_admin' %}">Add Article</a>
+									<a class="dropdown-item" href="https://www.google.com">Policies</a>
+									<a class="dropdown-item" href="#">View Assets</a>
+								</div>
+							</div>
+						</div>
+                       
+					</div>
+				</div>
+                {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    
+                    {% for message in messages %}
+                        <div class="notification is-info"> {{ message }} </div>
+                    {% endfor %}
+              
+                
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+				{% endif %}
+                   
+
+            <!-- Responsive tables Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix mb-20">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Articles table</h4>
+                        <p>This Table Show various articles with actions to be done on them </p>
+                    </div>
+                    <div class="pull-right"><a href="#" class="btn-block" data-backdrop="static" data-toggle="modal" data-target="#add_catMod" type="button"> <button class="btn btn-info btn-lg btn-block">Add Category</button></a>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive pb-20">
+                    <table class="data-table table hover nowrap">
+                        <thead>
+                            <th>Category ID </th>
+                            <th>Category Name </th>
+                            <th>Number of Articles </th>
+                            <th>Edit </th>
+                            <th>Delete </th>
+                            
+                           </thead>
+                  
+                  
+                            <tbody>
+                             {% for items in cat %}
+                               
+                             
+                              <tr>
+                                <td class="tm-product-name">{{items.id}}</td>
+                                <td class="tm-product-name">{{items.name}} </td>
+                                
+                                <td class="tm-product-name"></td>
+                                  
+                                <td>
+                                  <a href="#" id="{{items.id}}" onclick="get_id(this.id)" class="btn-block" data-backdrop="static" data-toggle="modal" data-target="#edit_catMod"  class="tm-product-delete-link">
+                                    <i class="icon-copy dw dw-edit-1"></i>
+                                  </a>
+                                 
+                            
+
+
+                                </td>
+                                
+                                <td class="text-center">
+                                  <a href="{% url 'del_cat' items.id %}" class="tm-product-delete-link">
+                                    <i class="icon-copy dw dw-delete-3"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- table container -->
+                        
+                      </div>
+                    </div>
+
+<!--Start modal to edit cat-->
+                    <div class="modal fade" id="edit_catMod" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="login-box bg-white box-shadow border-radius-10">
+                                    <div class="login-title">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="text-center ">Edit Category </h2>
+                                    </div>
+                                    <form action=" {% url 'edit_cat' %}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-group mb-0">
+                                                    <div class="input-group custom">
+                                                        <input name="ee" id="ss" hidden></input>
+                                                        <input name="tr" type="text" class="form-control form-control-lg" " placeholder="Category Name">
+                                                        <div class="input-group-append custom">
+                                                            <span class="input-group-text"></span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!--
+                                                        use code for form submit
+                                                        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
+                                                    -->
+                                                    <button class="btn btn-info btn-lg btn-block" type="submit">Edit Category</button>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--End modal to edit cat-->
+
+                
+ <!-- Modal to Add Cat-->
+                        <div class="modal fade" id="add_catMod" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="login-box bg-white box-shadow border-radius-10">
+                                        <div class="login-title">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h2 class="text-center ">Add New Category</h2>
+                                        </div>
+                                        <form action=" {% url 'add_cat' %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group mb-0">
+                                                        <div class="input-group custom">
+                                                            
+                                                            <input name="cat_name" type="text" class="form-control form-control-lg" " placeholder="Category Name">
+                                                            <div class="input-group-append custom">
+                                                                <span class="input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!--
+                                                            use code for form submit
+                                                            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
+                                                        -->
+                                                        <button class="btn btn-info btn-lg btn-block" type="submit">Add New Category</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End modal to add cat-->
+
+
+  
+
+<script>
+    function get_id(cli) {
+        
+        document.getElementById("ss").value = cli
+    }
+
+</script>
+
+{% endblock content %}

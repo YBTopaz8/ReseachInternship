@@ -1,0 +1,132 @@
+
+{% extends 'userprofile/admin2/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+
+        <!--Nav BreadCrumb-->
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Navigation Guide</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'manage_articles' %}">Manage Articles</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Delete Articles</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div >
+                            <a class="btn btn-secondary" href="{% url 'manage_articles' %}" role="button"><i class="icon-copy ion-arrow-left-a"></i>
+                                Back
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!--Page Begins Here-->
+    
+    
+    <div class="card-box mb-30">
+        <div class="pd-20">
+            <h4 class="text-blue h4">Data Table For Multiple Deletions</h4>
+        </div>
+        <form action="{% url 'del_arts' %}" method="post">
+            {% csrf_token %}
+          
+        <div class="pb-20">
+            <table class="data-table table hover nowrap" >
+              <thead>
+                <tr>
+                    <th scope="col">&nbsp;</th>
+
+                  <th scope="col">Article Code</th>
+                  <th scope="col">Article Title</th>
+                  <th scope="col">Article Category </th>
+                  <th scope="col">Article Summary</th>
+                  <th scope="col">Article Volume</th>
+                  <th scope="col">Article Publication Date</th>
+                  <th scope="col">Published By</th>
+                 
+                  
+                </tr>
+              </thead>
+              <tbody style="cursor: pointer;">
+                {% for items in articles %}
+                {% if items.art_publisher == request.user %}
+                <tr>
+                <td>
+                    <div class="dt-checkbox">
+                    <input type="checkbox" name="IDss" value="{{items.art_code}}" /></th>
+                    <span class="dt-checkbox-label"></span>
+                    </div>
+                  </td>
+                  <td scope="row">{{items.art_code}} </td> 
+                  <td class="tm-product-name">{{items.art_title}} </td>
+                  <td scope="row">{{items.art_category}} </td>
+                  <td scope="row">{{items.art_description}} </td>
+                  <td scope="row">{{items.art_volume}} </td> 
+                  <td scope="row">{{items.art_date}} </td> 
+                  <td scope="row" style="color: rgb(54, 190, 243); font-weight: 600; font-size: larger;">You </td>
+                 
+                  
+                  
+                  {% else %}
+                  <td>
+                    <div class="dt-checkbox">
+                    <input type="checkbox" name="IDss" value="{{items.art_code}}" /></th>
+                    <span class="dt-checkbox-label"></span>
+                    </div>
+                  </td>
+                  <td>{{items.art_code}} </td> 
+                  
+                  <td class="tm-product-name">{{items.art_title}} </td>
+                  <td scope="row">{{items.art_category}} </td>
+                  <td scope="row">{{items.art_description}} </td>
+                  <td scope="row">{{items.art_volume}} </td> 
+                  <td scope="row">{{items.art_date}} </td> 
+                  <td scope="row" style="color: rgb(228, 171, 161);">{{items.art_publisher}} </td>
+                 
+                 
+
+                  {% endif %}
+                </tr>
+               
+                {% endfor %}
+
+              </tbody>
+            </table>
+       
+          </div>
+          <!-- table container -->
+            <div class="row">
+                <div class="col-md-4 col-sm-12" >
+                                
+                </div>
+                <div class="col-md-4 col-sm-12" >
+                <button  class="btn btn-danger btn-block text-uppercase" 
+                onclick="return confirm('Are you sure you want to delete these?')" >
+                    Delete selected Article</button>
+                </div>
+                <div class="col-md-4 col-sm-12" >
+                    
+                </div>
+                
+            </div>
+            <br>
+        </div>
+      </form>
+   
+   
+{% endblock content %}

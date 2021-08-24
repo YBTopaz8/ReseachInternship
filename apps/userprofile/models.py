@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from django.templatetags.static import static
 
+
 from apps.team.models import Team
 from django.contrib.auth.models import User
 # Create your models here.

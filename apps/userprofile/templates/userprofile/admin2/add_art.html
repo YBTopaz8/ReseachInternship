@@ -1,0 +1,137 @@
+
+{% extends 'userprofile/admin2/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+
+        <!--Nav BreadCrumb-->
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Navigation Guide</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'manage_articles' %}">Manage Articles</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add an Article</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div >
+                            <a class="btn btn-secondary" href="{% url 'manage_articles' %}" role="button"><i class="icon-copy ion-arrow-left-a"></i>
+                                Back
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Form Begins!-->
+        <div class="pd-20 card-box mb-30">
+            <form action="." method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+        
+                <div class="pd-20">
+                    <h5 class="text-blue h4">Article Code:  <input style="color: black; background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" type="text" name="art_code" value="A{{code}}" readonly> </h5> 
+                
+                </div>
+                <div class="row">
+                    <!--Left side-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-control-label">Title</label>
+                            <input type="text" class="form-control" name="art_title" required>
+                            
+                        </div>
+                      
+                        <div class="form-group ">
+                            <label class="form-control-label">Article Volume</label>
+                            <input type="number" class="form-control" name="art_volume" id="" required>
+                        </div>
+                      
+                    </div>
+                    
+                    <!--Right Side-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-control-label">Category</label>
+                                <select  class="form-control" name="art_category">
+                                    {% for items in cat %}
+                                                    
+                                    <option  selected > {{items.name}}</option>
+                                        
+                                    {% endfor %}
+                                </select>
+                        </div>
+                        
+                        <div class="form-group ">
+                            <label class="form-control-label">Publisher</label>
+                            <select  class="form-control" name="art_publisher">
+                                {% for items in profile %}
+                              
+                                <option > {{items.email}}</option>
+                                   
+                               {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Triple Input-->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Published Date</label>
+                            <input type="text" class="form-control date-picker" name="art_date" placeholder="Click to Pick a Date">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Article Cover</label>
+                            <input type="file" class="form-control-file form-control height-auto" name="art_cover">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Article Document</label>
+                            <input type="file" class="form-control-file form-control height-auto" name="art_document">
+                        </div>
+                    </div>
+
+                    <!--Triple Input End-->
+
+                    <!--Large input Start-->
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Article Details</label>
+                            <textarea class="form-control" name="art_description"></textarea>
+                        </div>
+                    </div>
+                    
+                    
+                        <div class="col-md-4 col-sm-12" >
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-12" >
+                         
+                            <button style="text-align: center;" type="submit" class="btn btn-primary btn-lg btn-block">Add New Article</button>
+                        </div>
+                        <div class="col-md-4 col-sm-12" >
+                            
+                        </div>
+                    
+                </div>
+            </form>
+
+
+        </div>
+    </div>  
+
+{% endblock content %}

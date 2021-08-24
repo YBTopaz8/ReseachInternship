@@ -19,7 +19,7 @@
 <div class="container mt-12">
     <div class="row tm-content-row">
       <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col" >
-        <form action="." method="post">
+        <form action="{% url 'manage_articles' %}" method="post">
             {% csrf_token %}
           <div class="tm-bg-primary-dark tm-block tm-block-products" >
           <div class="tm-product-table-container" >
@@ -107,9 +107,9 @@
             href="{% url 'add_articles_admin' %}"
             class="btn btn-info btn-block text-uppercase mb-3">Add Article</a>
           <button  class="btn btn-danger btn-block text-uppercase" 
-              href="{% url 'manage_articles' %}">
+              href="#">
             Delete selected Article</button>
-          </a>
+         
         </div>
       </form>
       </div>

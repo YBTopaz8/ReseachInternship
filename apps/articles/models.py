@@ -2,6 +2,10 @@ from math import trunc
 from django.db import models
 from django.db.models.fields.related import OneToOneField
 
+from django_resized import ResizedImageField
+
+from django.urls import reverse
+
 from django.contrib.auth.models import User
 
 from django.templatetags.static import static
@@ -15,6 +19,8 @@ class Categories(models.Model):
     
     def __str__(self):
         return self.name
+    def get_url(self):
+            return reverse('edit_cat', args=[self.name])
 
 class Articles(models.Model):
     art_publisher=models.ForeignKey(User, on_delete=models.CASCADE, default="")
@@ -25,7 +31,7 @@ class Articles(models.Model):
     art_date = models.DateField( auto_now=True)
     art_created_date = models.DateField( auto_now_add=True)
     art_description= models.CharField(max_length=50, default="", blank=True)
-    art_cover = models.ImageField( upload_to='uploads/article_cover/',  blank=True, null=True)
+    art_cover = ResizedImageField( size=[570, 480], quality=80, upload_to='uploads/article_cover/',  blank=True, null=True)
     art_document = models.FileField( upload_to='uploads/article_document/', null=True, blank=True)
     
     def __str__(self):

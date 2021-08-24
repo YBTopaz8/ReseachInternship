@@ -1,0 +1,165 @@
+
+{% extends 'userprofile/admin2/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+
+        <!--Nav BreadCrumb-->
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Navigation Guide</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'manage_articles' %}">Manage Articles</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add an Article</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div >
+                            <a class="btn btn-secondary" href="{% url 'manage_articles' %}" role="button"><i class="icon-copy ion-arrow-left-a"></i>
+                                Back
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Form Begins!-->
+        <div class="pd-20 card-box mb-30">
+            <form action="." method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+        
+                <div class="pd-20">
+                    <h5 class="text-blue h4">Article Code:  <input style="color: black; background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" type="text" name="art_code" value="{{article.art_code}}" readonly> </h5> 
+                
+                </div>
+                <div class="row">
+                    <!--Left side-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-control-label">Title</label>
+                            <input type="text" class="form-control" name="art_title" value="{{article.art_title}}" required>
+                            <br>
+                        </div>
+                      
+                        <div class="form-group ">
+                            <label class="form-control-label">Article Volume</label>
+                            <input type="number" class="form-control" name="art_volume" id="" value="{{article.art_volume}}" required>
+                        </div>
+                      
+                    </div>
+                    
+                    <!--Right Side-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group ">
+                            <label class="form-control-label">Category</label>
+                                <select  class="form-control" name="art_category">
+                                    {% for items in cat %}
+                                                    
+                                    <option  selected > {{items.name}}</option>
+                                        
+                                    {% endfor %}
+                                </select>
+                                Current : <b style="color: cornflowerblue;">{{article.art_category}}</b><br>
+                        </div>
+                        
+                        <div class="form-group ">
+                            <label class="form-control-label">Publisher</label>
+                            <select  class="form-control" name="art_publisher">
+                                {% for items in profile %}
+                              
+                                <option > {{items.email}}</option>
+                                   
+                               {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--double Input-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Published Date</label>
+                            <input type="text"  class="form-control date-picker" placeholder="Click to Pick a Date" name="art_date" placeholder="Click to Pick a Date">
+                            Current Date: {{article.art_date|date:'d M, Y'}}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Article Document</label>
+                            <input type="file" class="form-control-file form-control height-auto" name="art_document">
+                            {% if article.art_document %}
+                              Current doc : <a href="{{article.art_document.url}}" download="{{article.art_document.url}}" style="text-decoration: none; color: rgb(28, 60, 165);">{{article.art_title}}</a>
+                            
+                              {% else %}
+                              <span style="color: red;"> No Current Doc</span>
+                            {% endif %}
+                        
+                        </div>
+                    </div>
+
+                    <!--Triple Input End-->
+
+                    <!--Large input Start-->
+                    <div class="col-md-3 col-sm-12" >
+                        <label > Current Cover</label>
+                        <div class="da-card">
+							<div class="da-card box-shadow">
+								<div class="da-card-photo">
+									<img src="{{article.get_art_cover}}" alt="">
+									<div class="da-overlay">
+										<div class="da-social">
+										<h5 class="mb-10 color-white pd-20">{{article.art_title}}</h5>
+											<ul class="clearfix">
+												<li><a href="{{article.get_art_cover}}" data-fancybox="images" data-toggle="tooltip" data-placement="right" title="Click To View Image"><i class="fa fa-picture-o"></i></a></li>
+												
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="form-group">
+                            <label>Article Cover</label>
+                            <input type="file" class="form-control-file form-control height-auto" name="art_cover">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12"  >
+                        <div class="form-group">
+                            <label>Article Details</label>
+                            <textarea style="height: 342px;" class="form-control" name="art_description">{{article.art_description}}</textarea>
+                        </div>
+                    </div>
+                    
+                    
+                        <div class="col-md-4 col-sm-12" >
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-12" >
+                         
+                            <button style="text-align: center;" type="submit" class="btn btn-success btn-lg btn-block">Edit Article</button>
+                        </div>
+                        <div class="col-md-4 col-sm-12" >
+                            
+                        </div>
+                    
+                </div>
+            </form>
+
+
+        </div>
+    </div>  
+
+{% endblock content %}
