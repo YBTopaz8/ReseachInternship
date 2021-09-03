@@ -131,7 +131,9 @@ Choses à ajouter dans le futur :
 - Possibilité pour les utilisateurs de poster des articles sur la page d'accueil (simplement des images pour le moment).
 - Autres détails mineurs
 
+===============================================
 Procédure d'installation :
+===============================================
 1.	Cloner/fork le projet
 2.	Activez l'environnement virtuel (env) en utilisant le terminal
 3.	Installer Django
@@ -183,8 +185,9 @@ Things to be added in future:
 -	Ability for users to post articles in the front page (simply images for now)
 -	Other minor details
 
-
+===============================================
 Installation procedure:
+===============================================
 1.	Clone/fork project
 2.	Activate virtual environment (env) using terminal
 3.	Install Django
