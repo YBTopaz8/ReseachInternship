@@ -137,7 +137,7 @@ Procédure d'installation :
 1.	Cloner/fork le projet
 2.	Activez l'environnement virtuel (env) en utilisant le terminal
 3.	Installer Django
-4.	Installer pillow, installer mysqlclient
+4.	Installer pillow, installer mysqlclient, django-resized
 a.	EDITER LA BASE DE DONNEES dans invitations/settings.py à ce qui correspond à votre goût : mysql, postgre, sqlite etc... (IMPORTANT !). Dans mon cas, c'est MySQL qui a été utilisé.
 b.	EDITER LA CONFIGURATION SMTP dans invitations/settings.py avec ce qui vous convient. (IMPORTANT !). Dans mon cas, j'ai utilisé Google SMTP. 
 5.	Faire les migrations, migrer
