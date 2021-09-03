@@ -161,8 +161,8 @@ when the user logs in, the system should be able to recognize the code
 a code can be used only ONCE.
 
 =================================================================
--------------Update 26/7/2021 (Application Revamped)------------
-==================================================================
+Update 26/7/2021 (Application Revamped)
+=================================================================
 After learning how Django Models, renders, redirections and forms work, I successfully implemented the ability to send invitations via email.
 
 FULL PATCH NOTES BELOW. INSTALLATION NOTES EVEN FURTHER BELOW;
